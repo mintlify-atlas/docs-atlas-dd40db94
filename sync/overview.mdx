@@ -1,0 +1,100 @@
+---
+title: "Sync & Backup Overview"
+description: "Keep your library, reading progress, bookmarks, highlights, and notes consistent across devices using backup/restore or automatic cloud sync."
+keywords: ["sync", "backup", "restore", "cloud", "WebDAV", "reading progress"]
+---
+
+Koodo Reader can save and sync your entire reading data — books, covers, progress, bookmarks, highlights, notes, and app configuration — to a cloud provider or a local file. You can choose between **manual backup/restore** and **automatic sync** depending on your workflow.
+
+## What gets synced
+
+Every backup or sync operation captures:
+
+- **Library** — your book files and cover images
+- **Reading progress** — current position in every book
+- **Bookmarks** — all saved positions
+- **Highlights and annotations** — inline marks and their colors
+- **Notes** — attached comments and note tags
+- **App configuration** — reader settings, themes, and plugin list
+
+The backup is packaged as a single `data.zip` archive containing a `book/`, `cover/`, and `config/` directory. The `config/` directory holds SQLite databases (`books.db`, `notes.db`, `bookmarks.db`, `words.db`, `plugins.db`) and JSON configuration files.
+
+## Two sync modes
+
+### Manual backup and restore
+
+Backup and restore give you full, explicit control over when your data is saved and loaded.
+
+- **Backup** — exports the current state of your library to a local file or uploads `data.zip` to a cloud provider.
+- **Restore** — imports a previously created backup, either from a local file or by downloading `data.zip` from a cloud provider.
+
+To access backup and restore, go to **Settings → Backup**.
+
+<Note>
+  Restore replaces your current local data with the contents of the backup. Make sure you have an up-to-date backup before restoring.
+</Note>
+
+### Automatic sync
+
+When a sync provider is configured, Koodo Reader keeps your data in sync automatically as you read. Changes are pushed to and pulled from the cloud without manual intervention. Sync is two-way: data flows in both directions so that the most recent state is always authoritative.
+
+<Note>
+  Automatic sync requires a Koodo Pro account for all providers except WebDAV, FTP, and SFTP.
+</Note>
+
+## Backup vs. sync
+
+| | Backup / Restore | Automatic Sync |
+|---|---|---|
+| Direction | One-way (export or import) | Two-way (push and pull) |
+| Trigger | Manual | Automatic |
+| Use case | Periodic snapshots, migration | Continuous cross-device consistency |
+| Pro required | No (for local and free providers) | Yes (except WebDAV, FTP, SFTP) |
+
+## Supported cloud providers
+
+Koodo Reader supports the following providers. Providers marked **Pro** require a Koodo Pro subscription.
+
+### Free providers
+
+These providers are available to all users without a Pro subscription.
+
+| Provider | Platforms |
+|---|---|
+| WebDAV | Desktop, browser, mobile |
+| FTP | Desktop only |
+| SFTP | Desktop only |
+
+### Pro providers
+
+<Note>
+  Pro providers require a Koodo account with an active Pro subscription. Sign in at **Settings → Account** before configuring a Pro provider.
+</Note>
+
+| Provider | Platforms |
+|---|---|
+| S3 Compatible | Desktop, browser, mobile |
+| Docker | Desktop, browser, mobile |
+| OneDrive | Desktop, browser, mobile |
+| OneDrive (full access) | Desktop, browser, mobile |
+| Google Drive | Desktop, browser, mobile |
+| Dropbox | Desktop, browser, mobile |
+| Box | Desktop, browser, mobile |
+| MEGA | Desktop, browser |
+| iCloud | Desktop, mobile |
+| Dubox | Desktop, mobile |
+| Aliyun Drive | Desktop, mobile |
+| Yandex Disk | Desktop, mobile |
+| 115 Yun | Desktop, mobile |
+| pCloud | Desktop, mobile |
+
+## Learn more
+
+<CardGroup cols={2}>
+  <Card title="Cloud providers" icon="cloud" href="/sync/cloud-providers">
+    Configuration details for every supported cloud provider, including OAuth and credential-based setup.
+  </Card>
+  <Card title="Self-hosted sync" icon="server" href="/sync/self-hosted">
+    Use your own WebDAV, SFTP, FTP, or S3-compatible storage as a sync backend.
+  </Card>
+</CardGroup>

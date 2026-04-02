@@ -1,0 +1,93 @@
+{
+  "projectType": "saas",
+  "projectName": "Koodo Reader",
+  "projectDescription": "A cross-platform ebook manager and reader with support for 15+ formats, cloud sync, AI features, and self-hosting via Docker for Windows, macOS, Linux, Android, iOS, and Web.",
+  "theme": "almond",
+  "primaryColor": "#949493",
+  "lightColor": "#383737",
+  "darkColor": "#d2cabe",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "features/book-management",
+              "features/reading",
+              "features/annotations",
+              "features/ai-tools"
+            ]
+          },
+          {
+            "group": "Sync & Backup",
+            "pages": [
+              "sync/overview",
+              "sync/cloud-providers",
+              "sync/self-hosted"
+            ]
+          },
+          {
+            "group": "Customization",
+            "pages": [
+              "customization/reader-settings",
+              "customization/themes",
+              "customization/plugins"
+            ]
+          },
+          {
+            "group": "Self-Hosting",
+            "pages": [
+              "self-hosting/docker",
+              "self-hosting/configuration"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": [
+              "contributing/development",
+              "contributing/translation"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Supports 15+ ebook formats including EPUB, PDF, MOBI, AZW3, FB2, CBZ, DOCX, Markdown, HTML, and more",
+    "Cross-platform: Windows, macOS, Linux, Android, iOS, and Web",
+    "Cloud sync and backup with OneDrive, Google Drive, Dropbox, MEGA, WebDAV, FTP, SFTP, S3-compatible storage, and more",
+    "AI-powered dictionary, translation, and summarization",
+    "Text-to-speech with plugin support for custom voices",
+    "Annotations: bookmarks, highlights, notes with export",
+    "Fully customizable reading experience: fonts, layouts, themes, brightness",
+    "Plugin system for extending TTS, AI, and other capabilities",
+    "Self-hosting via Docker with built-in HTTP server",
+    "40+ UI languages supported"
+  ],
+  "publicApiSurface": [
+    "Book model (key, name, author, format, cover, md5, path, charset)",
+    "Note model (highlights, bookmarks, annotations)",
+    "Plugin model (type, script, config, langList, voiceList)",
+    "SyncService.getSyncUtil() — get configured cloud sync utility",
+    "SyncService.getPickerUtil(service) — get file picker for a cloud service",
+    "backup(name) — backup library to local or cloud storage",
+    "restore(name) — restore library from local or cloud storage",
+    "loginRegister(service, code) — OAuth login/register flow",
+    "fetchUserInfo() — fetch authenticated user info",
+    "updateUserConfig(config) — update user configuration on server",
+    "TTSUtil.readAloud(currentIndex) — play TTS audio for a segment",
+    "TTSUtil.cacheAudio(...) — pre-cache TTS audio segments",
+    "StyleHelper.getDefaultCss(ConfigService) — get default reader CSS",
+    "Docker HTTP server on port 8080 with configurable username/password"
+  ]
+}

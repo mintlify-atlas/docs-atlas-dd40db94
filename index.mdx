@@ -1,97 +1,78 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Koodo Reader"
+description: "A cross-platform ebook manager and reader with support for 15+ formats, cloud sync, AI features, and self-hosting."
 ---
 
-## Setting up
+Koodo Reader is a modern, open-source ebook manager and reader that works across Windows, macOS, Linux, Android, iOS, and Web. Import books in any popular format, sync your library to the cloud, and read with a fully customizable experience.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Installation" icon="download" href="/installation">
+    Download Koodo Reader for your platform — desktop, mobile, or web.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Import your first book and start reading in minutes.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Sync & Backup" icon="cloud" href="/sync/overview">
+    Keep your library and reading progress in sync across all your devices.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Self-Hosting" icon="server" href="/self-hosting/docker">
+    Deploy Koodo Reader on your own server with Docker.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What you can do with Koodo Reader
 
-Everything you need to create world-class documentation.
+<CardGroup cols={2}>
+  <Card title="Read any format" icon="book-open" href="/features/reading">
+    EPUB, PDF, MOBI, AZW3, FB2, CBZ, DOCX, Markdown, HTML, and more.
+  </Card>
+  <Card title="Annotate as you read" icon="highlighter" href="/features/annotations">
+    Add highlights, bookmarks, and notes — then export them.
+  </Card>
+  <Card title="AI-powered tools" icon="robot" href="/features/ai-tools">
+    Dictionary lookup, translation, and summarization powered by AI.
+  </Card>
+  <Card title="Customize your experience" icon="sliders" href="/customization/reader-settings">
+    Adjust fonts, layouts, themes, brightness, and more.
+  </Card>
+  <Card title="Manage your library" icon="book" href="/features/book-management">
+    Organize books with shelves, sort, search, and bulk import.
+  </Card>
+  <Card title="Extend with plugins" icon="puzzle-piece" href="/customization/plugins">
+    Add custom TTS voices and AI providers through plugins.
+  </Card>
+</CardGroup>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Supported formats
 
-## Need inspiration?
+Koodo Reader handles all major ebook and document formats out of the box:
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+| Format | Extensions |
+|--------|------------|
+| EPUB | `.epub` |
+| PDF | `.pdf` |
+| Mobipocket / Kindle | `.mobi`, `.azw3`, `.azw` |
+| FictionBook | `.fb2` |
+| Comic book archives | `.cbr`, `.cbz`, `.cbt`, `.cb7` |
+| Rich text | `.docx`, `.md` |
+| Plain text | `.txt` |
+| HyperText | `.html`, `.htm`, `.xhtml`, `.mhtml`, `.xml` |
+
+## Platforms
+
+Koodo Reader runs natively on every major platform:
+
+<Steps>
+  <Step title="Desktop">
+    Native apps for **Windows**, **macOS**, and **Linux** via Electron. Install from the website, Scoop, Homebrew, or your Linux package manager.
+  </Step>
+  <Step title="Mobile">
+    Native apps for **Android** and **iOS** available from the respective app stores.
+  </Step>
+  <Step title="Web">
+    Use the hosted web version at [web.koodoreader.com](https://web.koodoreader.com) — no installation required.
+  </Step>
+  <Step title="Self-hosted">
+    Run your own instance with Docker for full data control and offline access.
+  </Step>
+</Steps>

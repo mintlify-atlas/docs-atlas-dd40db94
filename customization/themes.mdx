@@ -1,0 +1,131 @@
+---
+title: "Themes"
+description: "Change Koodo Reader's color scheme, apply night mode, and tune brightness for any lighting condition."
+---
+
+Koodo Reader lets you control the visual appearance of both the application shell and the reading area. You can choose from preset background and text color combinations, pick a custom accent color, and adjust brightness and invert settings for different lighting conditions.
+
+<Note>
+  Theme selections are saved to your local configuration and persist across sessions. If you switch devices or use a new browser profile, you will need to reapply your preferred theme.
+</Note>
+
+## Application skin
+
+The **Skin** setting controls the overall light or dark appearance of the Koodo interface (not just the reading area). Navigate to **Settings > Appearance** to choose one of three modes:
+
+| Mode | Description |
+|------|-------------|
+| Follow OS | Koodo matches your operating system's light or dark mode setting automatically. |
+| Light mode | The application uses a light color palette regardless of your OS setting. |
+| Night mode | The application switches to a dark palette, reducing eye strain in dim environments. |
+
+## Reading area background and text color
+
+The reading area background is independent of the application skin. You can set it to one of four presets or pick a fully custom color.
+
+### Applying a background preset
+
+<Steps>
+  <Step title="Open a book">
+    Open any book in the reader.
+  </Step>
+  <Step title="Open the reader settings panel">
+    Click the **menu** icon in the top-right corner of the reader, then select the **Appearance** or **Settings** tab.
+  </Step>
+  <Step title="Choose a background preset">
+    Select one of the four preset combinations:
+
+    | Preset | Background | Text |
+    |--------|-----------|------|
+    | White | `rgba(255,255,255,1)` — bright white | `rgba(0,0,0,1)` — black |
+    | Dark | `rgba(44,47,49,1)` — near-black | `rgba(255,255,255,1)` — white |
+    | Sepia | `rgba(233,216,188,1)` — warm paper tone | `rgba(89,68,41,1)` — brown |
+    | Green | `rgba(197,231,207,1)` — soft green | `rgba(54,80,62,1)` — dark green |
+
+    Choosing a preset updates both the background and text colors together so contrast is always maintained.
+  </Step>
+  <Step title="Set a custom color (optional)">
+    Click the color swatch next to the background or text color fields and use the color picker to choose any color. Custom background and text colors are set independently, so you can mix them freely.
+  </Step>
+</Steps>
+
+## Accent theme color
+
+The **Theme color** setting applies an accent color to interactive UI elements throughout the app: buttons, switches, search highlights, sidebar selections, and borders. It does not change the reading area background.
+
+Koodo ships with eleven built-in accent colors:
+
+| Name | Hex |
+|------|-----|
+| Default | (system default, no override) |
+| Blue | `#0179CA` |
+| Green | `#008F91` |
+| Red | `#F16464` |
+| Purple | `#6867D1` |
+| Orange | `#F97316` |
+| Pink | `#EC4899` |
+| Yellow | `#EAB308` |
+| Violet | `#8B5CF6` |
+| Sky | `#0EA5E9` |
+| Slate | `#64748B` |
+
+### Applying a theme color
+
+<Steps>
+  <Step title="Open Settings">
+    Click the **Settings** icon in the sidebar or press the keyboard shortcut to open the settings panel.
+  </Step>
+  <Step title="Go to Appearance">
+    Select the **Appearance** tab.
+  </Step>
+  <Step title="Pick a color">
+    Click any of the color swatches in the **Theme color** row. The accent color updates across the entire application immediately. Select **Default** to remove the custom accent and return to the system color.
+  </Step>
+</Steps>
+
+When an accent color is active, Koodo injects CSS variables derived from the selected hex value into the document. All affected elements — buttons, toggles, highlighted list items, search boxes, and separators — update to use tints and shades of that color.
+
+## Brightness
+
+The brightness slider adjusts a CSS `brightness()` filter applied to the reading area. This is separate from your system display brightness.
+
+- Values **below 1** dim the reading area, useful for reading in a dark room without lowering your whole screen.
+- Values **above 1** boost apparent brightness, which can help on low-brightness displays in daylight.
+
+The setting takes effect immediately and is saved with your configuration.
+
+## Invert color
+
+**Invert color** (`isInvert`) applies a CSS `invert(1)` filter to the reading area. Use it to quickly convert a white background to a dark one without switching background presets.
+
+Common combinations:
+
+| Reading condition | Suggested setup |
+|------------------|-----------------|
+| Daytime reading | White background, brightness at 1.0, invert off |
+| Low-light evening | Dark or sepia background, brightness ~0.7, invert off |
+| True dark mode | White background, invert on — text appears white on black |
+| High contrast | White background, invert on, brightness at 1.2 |
+
+<Tip>
+  For reading at night, the **Night mode** skin combined with a **Dark** background preset and reduced brightness gives you the most comfortable experience without needing to enable invert.
+</Tip>
+
+## Highlight and annotation colors
+
+Koodo uses four built-in highlight colors for annotations and four line colors for underline annotations. These are fixed and are not controlled by the theme color setting.
+
+Highlight colors: `#FEF3CD` (yellow), `#FBFACC` (pale yellow), `#CEFACD` (green), `#CDE9FA` (blue).
+
+Underline colors: `#FF0000` (red), `#000080` (navy), `#0000FF` (blue), `#2EFF2E` (bright green).
+
+To add or manage annotations, see [Annotations](/features/annotations).
+
+<CardGroup cols={2}>
+  <Card title="Reader settings" icon="sliders" href="/customization/reader-settings">
+    Adjust typography, layout, and display options.
+  </Card>
+  <Card title="Plugins" icon="puzzle" href="/customization/plugins">
+    Add TTS and AI capabilities with plugins.
+  </Card>
+</CardGroup>

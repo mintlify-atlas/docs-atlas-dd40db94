@@ -1,0 +1,165 @@
+---
+title: "Book Management"
+description: "Organize, import, and manage your ebook library in Koodo Reader."
+keywords: ["library", "import", "shelves", "sort", "search", "book formats"]
+---
+
+Koodo Reader's library is the home screen where all your books live. It supports three view modes, flexible import methods, shelf-based organization, and a trash bin for safe deletion.
+
+## Library view modes
+
+The toolbar in the top-right corner of the library lets you switch between three display modes.
+
+<CardGroup cols={2}>
+  <Card title="Card mode" icon="layout-grid">
+    Shows each book as a tile with its cover, title, and author. The best view for browsing a visually rich collection.
+  </Card>
+  <Card title="List mode" icon="list">
+    Displays books in a compact, single-row list with metadata columns. Easier to scan large libraries or compare details quickly.
+  </Card>
+  <Card title="Cover mode" icon="image">
+    Shows only cover art, maximizing visual density. Useful when you want a quick visual overview of your collection.
+  </Card>
+</CardGroup>
+
+<Tip>
+Your view mode preference is saved and restored each time you open Koodo Reader.
+</Tip>
+
+## Importing books
+
+### Drag and drop
+
+Drag one or more book files directly from your file manager onto the Koodo Reader window. All supported formats are accepted.
+
+### Local import
+
+Click the **Add books** button in the top-left of the library and select files from your device. You can select multiple files in a single dialog.
+
+<Note>
+On the desktop app, you can enable **Import books as link** in Settings → General. When active, imported books are linked to their original path rather than copied into the library folder. This keeps the library lightweight but means the books must remain at their original location.
+</Note>
+
+### Cloud import
+
+Koodo Reader can import books directly from cloud storage. Supported sources include:
+
+- OneDrive
+- Google Drive
+- MEGA
+- Yandex Disk
+- Box
+- FTP / SFTP
+- WebDAV
+- SMB
+- Object Storage
+
+To import from cloud storage, open **Settings → Sync** and connect a data source. Once connected, books stored in that source appear in the import dialog.
+
+### Supported formats
+
+| Format | Extensions |
+|---|---|
+| EPUB | `.epub` |
+| PDF | `.pdf` |
+| Mobipocket / Kindle | `.mobi`, `.azw3`, `.azw` |
+| Plain text | `.txt` |
+| FictionBook | `.fb2` |
+| Comic book archive | `.cbr`, `.cbz`, `.cbt`, `.cb7` |
+| Rich text | `.md`, `.docx` |
+| HyperText | `.html`, `.xml`, `.xhtml`, `.mhtml`, `.htm` |
+
+<Warning>
+DRM-protected files (most purchased Kindle books) cannot be opened. Only DRM-free files are supported.
+</Warning>
+
+## Book metadata
+
+Koodo Reader reads and stores the following metadata for each book:
+
+| Field | Description |
+|---|---|
+| `name` | Book title, extracted from the file or set manually |
+| `author` | Author name |
+| `publisher` | Publisher, when present in the file |
+| `format` | File format (e.g., `EPUB`, `PDF`) |
+| `size` | File size in bytes |
+| `page` | Total page count |
+| `description` | Book description or blurb |
+| `cover` | Cover image, extracted from the file |
+| `charset` | Character encoding |
+
+To view or edit a book's metadata, right-click the book and select **Book info**.
+
+<Tip>
+Enable **Use file name as book title** in Settings → General to override the embedded title with the file's name. This is useful when book files have cleaner names than their embedded metadata.
+</Tip>
+
+## Organizing with shelves
+
+Shelves are named collections you create to group books however you like — by genre, project, reading status, or any other category.
+
+### Creating a shelf
+
+Right-click any book and choose **Add to shelf**, then select **New shelf** from the dropdown and type a name.
+
+### Adding books to a shelf
+
+You can add a single book or a batch selection:
+
+1. To add one book, right-click it and choose **Add to shelf**, then select an existing shelf.
+2. To add multiple books, enable selection mode, check the books you want, then choose **Add to shelf**.
+
+When adding a book, you can choose to **Copy to** (keep the book in the main library and the shelf) or **Move to** (remove it from its current shelf location and add it to the new one).
+
+### Shelf settings
+
+| Setting | Description |
+|---|---|
+| Hide books already added to a shelf | Hides shelved books from the main library view |
+| Delete book from shelf also deletes book | Removing a book from a shelf also deletes it from the library entirely |
+
+These options are in **Settings → General**.
+
+## Search and sort
+
+### Searching
+
+Use the search bar at the top of the library to filter books by title or author. Results update as you type.
+
+### Sorting
+
+Click the **Sort** button in the toolbar to open the sort menu. Available sort criteria:
+
+- Recently read
+- Book name
+- Date added
+- Reading duration
+- Author name
+- Reading progress
+- File size
+
+Each criterion can be ordered **ascending** or **descending**.
+
+## Deleting books and the trash bin
+
+By default, deleting a book moves it to the trash bin rather than permanently removing it. You can restore books from the trash at any time.
+
+To permanently delete all trashed books, open the trash bin and use the **Empty trash** option.
+
+<Note>
+To skip the trash and delete books permanently by default, enable **Disable trash bin** in Settings → General.
+</Note>
+
+On the desktop app, you can also enable **Delete original file when permanently deleting books** in Settings → General. When active, the source file on disk is removed along with the library entry.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Reading" href="/features/reading" icon="book-open">
+    Open a book and explore reading layouts, navigation, and text selection.
+  </Card>
+  <Card title="Annotations" href="/features/annotations" icon="pencil">
+    Highlight text, add notes, and export your annotations.
+  </Card>
+</CardGroup>

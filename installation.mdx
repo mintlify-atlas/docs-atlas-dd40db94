@@ -1,0 +1,173 @@
+---
+title: "Installation"
+description: "Install Koodo Reader on Windows, macOS, Linux, Android, iOS, or run it in Docker. No account required."
+---
+
+<Tabs>
+  <Tab title="Desktop">
+    <Tabs>
+      <Tab title="Windows">
+        <Steps>
+          <Step title="Download the installer">
+            Go to [koodoreader.com/en/download](https://koodoreader.com/en/download) and download the Windows installer (`.exe`) for your architecture (x64, x86, or ARM64).
+
+            A portable `.zip` build is also available if you prefer not to run an installer.
+          </Step>
+          <Step title="Run the installer">
+            Double-click the downloaded `.exe` file and follow the prompts. Koodo Reader installs and launches automatically when the installer finishes.
+          </Step>
+        </Steps>
+
+        **Install with Scoop**
+
+        If you use [Scoop](https://scoop.sh), you can install Koodo Reader from the `extras` bucket:
+
+        ```shell
+        scoop bucket add extras
+        scoop install extras/koodo-reader
+        ```
+      </Tab>
+      <Tab title="macOS">
+        <Steps>
+          <Step title="Download the DMG">
+            Go to [koodoreader.com/en/download](https://koodoreader.com/en/download) and download the `.dmg` for your Mac. Two builds are available: `x64` for Intel Macs and `arm64` for Apple Silicon.
+          </Step>
+          <Step title="Open the DMG and drag to Applications">
+            Open the downloaded `.dmg` file, then drag **Koodo Reader** into your **Applications** folder.
+          </Step>
+          <Step title="Launch Koodo Reader">
+            Open **Koodo Reader** from **Applications** or Spotlight. On first launch, macOS may ask you to confirm opening an app downloaded from the internet — click **Open**.
+          </Step>
+        </Steps>
+
+        **Install with Homebrew**
+
+        If you use [Homebrew](https://brew.sh), run:
+
+        ```shell
+        brew install --cask koodo-reader
+        ```
+      </Tab>
+      <Tab title="Linux">
+        <Steps>
+          <Step title="Download your preferred package">
+            Go to [koodoreader.com/en/download](https://koodoreader.com/en/download) and download the package format for your distribution:
+
+            - **AppImage** — works on most distributions, no installation needed
+            - **.deb** — Debian, Ubuntu, and derivatives
+            - **.rpm** — Fedora, RHEL, openSUSE, and derivatives
+            - **Snap** — any distribution with snapd
+          </Step>
+          <Step title="Install the package">
+            <CodeGroup>
+
+            ```shell AppImage
+            chmod +x KoodoReader-*.AppImage
+            ./KoodoReader-*.AppImage
+            ```
+
+            ```shell Debian / Ubuntu (.deb)
+            sudo dpkg -i KoodoReader-*.deb
+            ```
+
+            ```shell Fedora / RHEL (.rpm)
+            sudo rpm -i KoodoReader-*.rpm
+            ```
+
+            ```shell Snap
+            sudo snap install --dangerous KoodoReader-*.snap
+            ```
+
+            </CodeGroup>
+          </Step>
+        </Steps>
+
+        **Install with Scoop**
+
+        Linux users with [Scoop](https://scoop.sh) can install from the `extras` bucket:
+
+        ```shell
+        scoop bucket add extras
+        scoop install extras/koodo-reader
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      Koodo Reader requires a 64-bit operating system. Windows 10 or later, macOS 10.15 (Catalina) or later, and any modern Linux distribution are supported.
+    </Note>
+  </Tab>
+  <Tab title="Mobile">
+    Both the Android and iOS apps are available from the official download page.
+
+    Visit **[koodoreader.com/en/download](https://koodoreader.com/en/download)** and tap the link for your platform:
+
+    - **Android** — download the APK and install it on your device. You may need to allow installation from unknown sources in your device settings.
+    - **iOS** — follow the link to the App Store listing and tap **Get**.
+
+    <Note>
+      Mobile apps share the same cloud sync providers as the desktop version. Sign in to the same cloud account to access your library across platforms.
+    </Note>
+  </Tab>
+  <Tab title="Web">
+    No installation is needed to use Koodo Reader in a browser.
+
+    Visit **[web.koodoreader.com](https://web.koodoreader.com)** to open the web app. Your library and reading progress are stored locally in your browser unless you connect a cloud sync provider.
+
+    <Tip>
+      The web version supports the same formats and sync providers as the desktop app. It is a good option for Chromebook users or when you need access to your library on a device where you cannot install software.
+    </Tip>
+  </Tab>
+  <Tab title="Docker">
+    Run Koodo Reader as a self-hosted web service using Docker.
+
+    **Quick start with `docker run`**
+
+    ```shell
+    docker run -d \
+      --name koodo-reader \
+      --restart unless-stopped \
+      -p 80:80 \
+      -p 8080:8080 \
+      -e SERVER_USERNAME=admin \
+      -e SERVER_PASSWORD=securePass123 \
+      -v /opt/uploads:/app/uploads \
+      ghcr.io/koodo-reader/koodo-reader:master
+    ```
+
+    Once running, open `http://localhost` in your browser.
+
+    **Deploy with Docker Compose**
+
+    Save the following as `docker-compose.yml`, then run `docker compose up -d`:
+
+    ```yaml docker-compose.yml
+    version: "3.8"
+
+    services:
+      koodo-reader:
+        image: ghcr.io/koodo-reader/koodo-reader:master
+        container_name: koodo-reader
+        restart: unless-stopped
+        ports:
+          - "80:80"
+          - "8080:8080"
+        environment:
+          - SERVER_USERNAME=${SERVER_USERNAME:-admin}
+          - SERVER_PASSWORD=${SERVER_PASSWORD:-securePass123}
+          - ENABLE_HTTP_SERVER=false
+        volumes:
+          - /opt/uploads:/app/uploads
+    ```
+
+    | Environment variable | Default | Description |
+    |---|---|---|
+    | `SERVER_USERNAME` | `admin` | Username for the upload server |
+    | `SERVER_PASSWORD` | `securePass123` | Password for the upload server |
+    | `ENABLE_HTTP_SERVER` | `false` | Enable the built-in HTTP file server on port 8080 |
+
+    <Warning>
+      Change `SERVER_USERNAME` and `SERVER_PASSWORD` before exposing the container to the internet. The defaults are not secure.
+    </Warning>
+  </Tab>
+</Tabs>

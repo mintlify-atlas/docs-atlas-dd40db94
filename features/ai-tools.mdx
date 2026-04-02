@@ -1,0 +1,144 @@
+---
+title: "AI Tools"
+description: "Look up words, translate passages, summarize chapters, and chat with AI about your books."
+keywords: ["AI", "dictionary", "translation", "summarization", "chat", "plugins"]
+---
+
+Koodo Reader includes a set of AI-powered tools accessible from the reader view. These features use Koodo's cloud service and require a Koodo account to function.
+
+<Note>
+AI features can be disabled entirely by enabling **Disable AI features** in Settings → General. Individual buttons in the reader menu can also be hidden — see **Hide AI button** in the reader settings panel.
+</Note>
+
+## Accessing AI tools
+
+AI tools are available from two entry points:
+
+1. **Text selection popup** — select any text in the reading view to open the popup toolbar, which includes quick-access buttons for dictionary lookup and translation.
+2. **AI panel** — click the AI button in the reader menu bar to open the full AI panel, which provides summarization, Q&A, and chat modes.
+
+## AI dictionary
+
+The dictionary looks up a selected word and returns a structured definition powered by AI. The response includes:
+
+- Pronunciation (with phonetic notation)
+- Audio playback (when available)
+- Word inflections
+- Definitions grouped by part of speech, each with example sentences and translations
+- Word comparison analysis for similar or commonly confused words
+
+### Looking up a word
+
+<Steps>
+  <Step title="Select a word">
+    Double-click a word, or click and drag to select it in the reader.
+  </Step>
+  <Step title="Click the dictionary icon">
+    In the selection popup, click the dictionary (book) icon.
+  </Step>
+  <Step title="View the definition">
+    The AI dictionary panel opens with the full entry, including pronunciations, meanings, and examples.
+  </Step>
+</Steps>
+
+### Supported dictionary languages
+
+The dictionary supports automatic language detection plus explicit source languages including English, Simplified Chinese, Traditional Chinese, Classical Chinese, Japanese, Korean, French, German, Spanish, Italian, Russian, and Portuguese.
+
+<Tip>
+Dictionary lookup history is saved and can be exported as a CSV file from the export options in the annotations panel.
+</Tip>
+
+## AI translation
+
+Translation converts selected text from one language to another using a streaming AI model. The result appears in a panel as the translation is generated in real time.
+
+### Translating selected text
+
+<Steps>
+  <Step title="Select text">
+    Click and drag to select the passage you want to translate.
+  </Step>
+  <Step title="Click the translate icon">
+    In the selection popup, click the translate icon.
+  </Step>
+  <Step title="Choose target language">
+    Select your target language from the language picker. The source language is detected automatically.
+  </Step>
+  <Step title="Read the translation">
+    The translation streams into the panel in real time.
+  </Step>
+</Steps>
+
+### Supported translation languages
+
+Translation supports over 80 target languages, including: English, Simplified Chinese, Traditional Chinese, Japanese, Korean, Spanish, French, Portuguese, German, Italian, Russian, Thai, Vietnamese, Arabic, Hindi, and many more. The full list is available in Settings → Language.
+
+<Note>
+Koodo also supports batch translation of multiple text segments via the internal batch translation API, used when translating longer passages or paginated content.
+</Note>
+
+## AI summarization
+
+Summarization generates a concise summary of the current chapter's text. It uses the same streaming response model as translation, so results appear progressively.
+
+### Summarizing a chapter
+
+<Steps>
+  <Step title="Open the AI panel">
+    Click the AI button in the reader menu bar.
+  </Step>
+  <Step title="Select the Ask mode">
+    The panel opens in Ask mode by default, which operates on the current chapter's text.
+  </Step>
+  <Step title="Use a sample prompt or type your own">
+    Koodo provides sample prompts such as "Summarize this chapter for me" and "What are the key points of this chapter". Click one or type your own question.
+  </Step>
+  <Step title="Read the response">
+    The AI generates a streamed response based on the chapter content.
+  </Step>
+</Steps>
+
+## AI chat
+
+In addition to chapter-focused Q&A, the AI panel includes a **Chat** mode for open-ended conversations not tied to the current chapter text. Sample prompts include book recommendations and explanations of literary concepts.
+
+Switch between Ask and Chat modes using the mode toggle at the top of the AI panel.
+
+<Tip>
+By default, the AI chat panel auto-scrolls to the bottom as responses stream in. To disable this and scroll manually, enable **Disable automatically scroll to the bottom of the AI chat** in Settings → Reading.
+</Tip>
+
+## Account and quota
+
+All AI features — dictionary, translation, summarization, and TTS AI voices — require a Koodo account and communicate with Koodo's cloud service.
+
+| Feature | Account required | Notes |
+|---|---|---|
+| AI dictionary | Yes | Per-request; subject to daily quota |
+| AI translation | Yes | Streaming; subject to daily quota |
+| AI summarization | Yes | Streaming; subject to daily quota |
+| AI TTS voices | Yes | Subject to daily character quota; purchasable quota available for Pro users |
+
+When the daily quota is exhausted, Koodo will prompt you to wait for the quota reset or, for AI TTS, to upgrade to Pro or purchase additional quota.
+
+<Warning>
+AI features require an active internet connection and a valid Koodo account session. Offline reading is fully supported, but AI tools will not function without connectivity.
+</Warning>
+
+## Plugin dependency
+
+AI features are powered by Koodo's built-in cloud service (`ReaderRequest`), not by local models. No separate AI plugin is required for dictionary, translation, or summarization. However, some extended AI behaviors — such as custom TTS voices or third-party model integrations — are configured via plugins.
+
+For plugin setup and TTS configuration, see [Plugins](/customization/plugins).
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Plugins" href="/customization/plugins" icon="puzzle">
+    Configure TTS voices and extend AI capabilities with plugins.
+  </Card>
+  <Card title="Annotations" href="/features/annotations" icon="pencil">
+    Save highlights and notes alongside your AI lookups.
+  </Card>
+</CardGroup>

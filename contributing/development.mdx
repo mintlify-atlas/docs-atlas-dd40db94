@@ -1,0 +1,116 @@
+---
+title: "Development Setup"
+description: "Set up a local development environment to contribute to Koodo Reader."
+keywords: ["development", "contributing", "build", "electron", "react"]
+---
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+- **Node.js** >= 20.0.0
+- **yarn**
+- **git**
+
+<Note>
+  Koodo Reader requires Node.js 20 or higher. Earlier versions are not supported. Check your version with `node --version`.
+</Note>
+
+## Clone the repository
+
+```bash
+git clone https://github.com/koodo-reader/koodo-reader.git
+cd koodo-reader
+```
+
+## Install dependencies
+
+```bash
+yarn
+```
+
+<Note>
+  The project uses **yarn**, not npm. Running `npm install` may produce an inconsistent lockfile.
+</Note>
+
+## Start a development server
+
+Koodo Reader runs in two modes: desktop (Electron) and web (browser). Choose the one you want to work on.
+
+<CodeGroup>
+
+```bash Desktop mode (Electron)
+yarn dev
+```
+
+```bash Web mode
+yarn start
+```
+
+</CodeGroup>
+
+- **Desktop mode** launches Electron alongside the React dev server and hot-reloads `main.js` via nodemon.
+- **Web mode** starts a standard Create React App dev server at `http://localhost:3000`.
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| UI framework | React 17 |
+| Language | TypeScript |
+| State management | Redux + redux-thunk |
+| Routing | react-router-dom v5 |
+| Desktop shell | Electron |
+| Internationalization | i18next / react-i18next |
+| Styling | CSS Modules |
+
+## Project structure
+
+```
+src/
+├── pages/        # Top-level route pages (BookList, Reader, etc.)
+├── components/   # Reusable UI components
+├── models/       # Data model definitions and types
+├── utils/        # Shared utility functions
+├── constants/    # Application-wide constants
+└── store/        # Redux store, reducers, and actions
+```
+
+## Build for production
+
+<CodeGroup>
+
+```bash Web build
+yarn build
+```
+
+```bash Desktop build (all platforms)
+yarn release
+```
+
+</CodeGroup>
+
+- `yarn build` compiles the React app into `build/` using Create React App's production config.
+- `yarn release` runs `yarn build` first (via the `prerelease` hook) and then invokes `electron-builder` to package the desktop app.
+
+## All available scripts
+
+| Script | Description |
+|---|---|
+| `yarn start` | Start the web dev server |
+| `yarn build` | Build the web app for production |
+| `yarn dev` | Start Electron in development mode |
+| `yarn release` | Build and package the desktop app |
+| `yarn ele` | Launch Electron against the current build |
+| `yarn analyze` | Analyze the production bundle with source-map-explorer |
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Translations" icon="language" href="/contributing/translation">
+    Help translate Koodo Reader into your language.
+  </Card>
+  <Card title="Self-hosting" icon="server" href="/self-hosting/docker">
+    Deploy the web version with Docker.
+  </Card>
+</CardGroup>

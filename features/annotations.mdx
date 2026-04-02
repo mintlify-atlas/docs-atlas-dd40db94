@@ -1,0 +1,165 @@
+---
+title: "Annotations"
+description: "Add bookmarks, highlights, and notes to your books, then export them in multiple formats."
+keywords: ["bookmarks", "highlights", "notes", "tags", "export", "annotations"]
+---
+
+Koodo Reader supports three types of annotations: bookmarks, highlights, and notes. All are stored locally (and synced to the cloud if sync is enabled) and can be exported in multiple formats.
+
+## Bookmarks
+
+A bookmark records a precise position in a book — stored as a CFI (Canonical Fragment Identifier) — along with the chapter name, a label, and the reading progress percentage at that location.
+
+### Adding a bookmark
+
+<Steps>
+  <Step title="Open the reader menu">
+    Hover over (or click) the top edge of the reading view to reveal the menu bar.
+  </Step>
+  <Step title="Click the bookmark icon">
+    Click the bookmark icon in the menu bar. The current page position is saved immediately.
+  </Step>
+</Steps>
+
+### Viewing and navigating bookmarks
+
+Open the **Bookmarks** panel from the reader menu to see a list of all bookmarks for the current book. Each entry shows:
+
+- The chapter name
+- The label (page label or position identifier)
+- Reading progress percentage at the time of bookmarking
+
+Click any bookmark entry to jump directly to that position.
+
+<Tip>
+Bookmarks are a fast way to mark a page you want to return to without interrupting your reading flow. They require no text selection.
+</Tip>
+
+## Highlights
+
+A highlight marks a specific passage of selected text with a background or underline color. Highlights are stored with the selected text, chapter, position (CFI and range), date, color, and any associated tags.
+
+### Adding a highlight
+
+<Steps>
+  <Step title="Select text">
+    Click and drag to select the text you want to highlight in the reading view.
+  </Step>
+  <Step title="Choose a color from the popup">
+    The selection popup appears automatically. Choose one of the available highlight colors.
+  </Step>
+  <Step title="Confirm">
+    The highlight is applied immediately and saved to your annotation list.
+  </Step>
+</Steps>
+
+### Highlight types and colors
+
+Koodo Reader supports two highlight types:
+
+- **Background** — a colored fill behind the text (colors: yellow `#FEF3CD`, pale yellow `#FBFACC`, green `#CEFACD`, blue `#CDE9FA`)
+- **Line** — a colored underline beneath the text (colors: red `#FF0000`, navy `#000080`, blue `#0000FF`, bright green `#2EFF2E`)
+
+The highlight type is determined automatically by the color index: colors 0–3 produce background highlights, colors 4–7 produce underline highlights.
+
+## Notes
+
+A note attaches a text comment to a highlighted passage. Notes use the same underlying model as highlights — they share the same `text`, `color`, `cfi`, `chapter`, and `percentage` fields — with the addition of a `notes` field for your written comment.
+
+### Adding a note to a highlight
+
+<Steps>
+  <Step title="Select text">
+    Click and drag to select the text you want to annotate.
+  </Step>
+  <Step title="Click the note icon in the popup">
+    In the selection popup, click the note (pencil) icon instead of a plain highlight color.
+  </Step>
+  <Step title="Write your note">
+    A text input appears. Type your note and confirm.
+  </Step>
+</Steps>
+
+You can also add or edit a note on an existing highlight by clicking it and selecting the edit option from the popup.
+
+### Viewing notes
+
+Open the **Highlights** or **Notes** panel from the reader menu. Notes and highlights are listed by chapter and reading progress. Clicking an entry jumps to that position in the book.
+
+Notes can be sorted by date or reading progress from the sort menu in the panel header.
+
+## Tags
+
+Both highlights and notes support tags, stored as an array of strings per annotation. Tags help you categorize annotations across books — for example, marking passages as `key-idea`, `quote`, or `follow-up`.
+
+### Adding tags
+
+When creating or editing a note or highlight, use the tag input field to add one or more tags. Tags are comma-separated and stored with the annotation.
+
+### Filtering by tag
+
+The annotations panel allows filtering by tag so you can quickly find all passages marked with a specific label.
+
+## Exporting annotations
+
+Koodo Reader can export your highlights and notes in five formats. The export includes the book title, author, chapter, highlighted text, note text (for notes), date, color, highlight type, and tags.
+
+| Format | File name pattern | Notes |
+|---|---|---|
+| CSV | `KoodoReader-Note-YYYY-MM-DD.csv` | Spreadsheet-compatible; includes all fields as columns |
+| Markdown | `KoodoReader-Note-YYYY-MM-DD.md` | Grouped by book, with blockquotes for text and bold labels for notes |
+| TXT | `KoodoReader-Note-YYYY-MM-DD.txt` | Plain text, grouped by book |
+| HTML | `KoodoReader-Note-YYYY-MM-DD.html` | Styled HTML document with blockquotes and metadata |
+| PDF | `KoodoReader-Note-YYYY-MM-DD.pdf` | Generated from the HTML output; falls back to HTML if PDF libraries are unavailable |
+
+Highlights-only export follows the same formats with file name prefix `KoodoReader-Highlight-YYYY-MM-DD`.
+
+### Exporting from the annotations panel
+
+<Steps>
+  <Step title="Open the Notes or Highlights panel">
+    Access it from the reader menu or from the main library's sidebar.
+  </Step>
+  <Step title="Click the export button">
+    The export icon is in the panel's header area.
+  </Step>
+  <Step title="Select a format">
+    Choose CSV, Markdown, TXT, HTML, or PDF from the format picker.
+  </Step>
+  <Step title="Save the file">
+    The file downloads automatically with a date-stamped name.
+  </Step>
+</Steps>
+
+<Note>
+Dictionary lookup history can also be exported as a CSV file (`KoodoReader-Dictionary-History-YYYY-MM-DD.csv`) from the same export options.
+</Note>
+
+<Tip>
+Enable **Export books with original name** in Settings → General to use the original file name when exporting book files, rather than the embedded title.
+</Tip>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Are annotations synced across devices?">
+    Yes. If you have cloud sync configured, your bookmarks, highlights, and notes are included in the sync. You can also enable **Koodo Sync** in Settings → Sync to use Koodo's own cloud service for faster synchronization of reading-related data.
+  </Accordion>
+  <Accordion title="Can I annotate PDFs?">
+    Yes. Highlights and bookmarks work in PDF files. The position is stored using PDF-specific coordinates rather than CFI.
+  </Accordion>
+  <Accordion title="What happens to annotations if I delete a book?">
+    Annotations are linked to the book's key. If you delete the book permanently, the associated annotations remain in storage but will show "Unknown book" in export outputs. Moving a book to the trash bin preserves all annotations.
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="AI Tools" href="/features/ai-tools" icon="sparkles">
+    Use AI to look up words, translate, and summarize passages.
+  </Card>
+  <Card title="Reader settings" href="/customization/reader-settings" icon="sliders">
+    Customize fonts, layouts, and display options.
+  </Card>
+</CardGroup>

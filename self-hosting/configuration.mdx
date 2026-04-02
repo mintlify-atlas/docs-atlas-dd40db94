@@ -1,0 +1,149 @@
+---
+title: "Configuration"
+description: "Environment variables and sync configuration for your self-hosted Koodo Reader instance."
+keywords: ["configuration", "environment variables", "docker", "self-hosted", "sync"]
+---
+
+Your self-hosted Koodo Reader instance is configured through environment variables passed to the Docker container. This page documents every available variable and explains how to connect the Koodo Reader app to your instance for book sync.
+
+## Environment variables
+
+<ParamField path="SERVER_USERNAME" type="string" default="admin">
+  The username required to authenticate with the HTTP file sync server on port 8080. Set this to a value other than the default before exposing your instance to the internet.
+</ParamField>
+
+<ParamField path="SERVER_PASSWORD" type="string" default="securePass123">
+  The password required to authenticate with the HTTP file sync server. This value is used when no Docker secret is configured via `SERVER_PASSWORD_FILE`. The server logs a warning at startup if you are still using the default password.
+</ParamField>
+
+<ParamField path="SERVER_PASSWORD_FILE" type="string" default="my_secret">
+  The name of a Docker secret that contains the server password. When a secret with this name exists at `/run/secrets/<name>`, it takes precedence over `SERVER_PASSWORD`. This is the recommended approach for production deployments.
+
+  See [Docker secrets](#docker-secrets) below for setup instructions.
+</ParamField>
+
+<ParamField path="ENABLE_HTTP_SERVER" type="string" default="false">
+  Controls whether the HTTP file sync server on port 8080 starts. Set to `"true"` to enable it. When set to `"false"` (the default), the sync server process exits immediately and port 8080 is not used.
+
+  You must set this to `"true"` if you want to use Koodo Reader's Docker sync feature.
+</ParamField>
+
+<ParamField path="PORT" type="number" default="8080">
+  The port the HTTP file sync server listens on inside the container. Change this only if you need to remap the internal port; it is simpler to remap at the Docker level using `-p <host>:8080` instead.
+</ParamField>
+
+<Warning>
+  Do not expose your instance to the internet with the default `SERVER_USERNAME` and `SERVER_PASSWORD` values. The defaults are public knowledge and provide no real security.
+</Warning>
+
+## Docker secrets
+
+Docker secrets are the recommended way to provide the server password in production. The server reads the secret from `/run/secrets/<SERVER_PASSWORD_FILE>` at startup. If found, it takes precedence over the `SERVER_PASSWORD` environment variable.
+
+```bash
+# Write your password to a secret file (no trailing newline)
+echo -n "your_secure_password" > my_secret.txt
+```
+
+Reference the secret in your `docker-compose.yml`:
+
+```yaml docker-compose.yml
+services:
+  koodo-reader:
+    image: ghcr.io/koodo-reader/koodo-reader:master
+    environment:
+      - SERVER_USERNAME=your_username
+      - SERVER_PASSWORD_FILE=my_secret
+      - ENABLE_HTTP_SERVER=true
+    secrets:
+      - my_secret
+
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+```
+
+Password resolution order at startup:
+
+1. Docker secret at `/run/secrets/<SERVER_PASSWORD_FILE>`
+2. `SERVER_PASSWORD` environment variable
+3. Hardcoded default `securePass123` (with a startup warning)
+
+## Uploads volume
+
+The HTTP server stores all uploaded files under `/app/uploads` inside the container. Mount this path to preserve data across container restarts:
+
+```yaml
+volumes:
+  - /opt/uploads:/app/uploads   # host directory (recommended)
+  # or
+  - uploads_data:/app/uploads   # named Docker volume
+```
+
+<Note>
+  Without a volume mount, all book files and sync data are lost when the container is removed or recreated. Configure your volume before adding any books.
+</Note>
+
+The server enforces path traversal protection — all file operations are constrained to the `/app/uploads` directory and its subdirectories.
+
+## Connecting Koodo Reader to your instance
+
+The HTTP file sync server exposes four endpoints used by the Koodo Reader app:
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| `POST` | `/upload?dir=<path>` | Upload a file to the specified subdirectory |
+| `GET` | `/download?dir=<path>&filename=<name>` | Download a file |
+| `DELETE` | `/delete?dir=<path>&filename=<name>` | Delete a file |
+| `GET` | `/list?dir=<path>` | List files in a directory |
+
+All requests require HTTP Basic Authentication using your configured `SERVER_USERNAME` and `SERVER_PASSWORD`.
+
+### Connection flow
+
+When you configure Docker as your sync backend in the Koodo Reader app, the app communicates with your self-hosted instance as follows:
+
+```
+Koodo Reader app
+      │
+      │  HTTP Basic Auth
+      ▼
+Your server:8080  (ENABLE_HTTP_SERVER=true)
+      │
+      ▼
+/app/uploads  (mounted volume)
+```
+
+To configure sync in the Koodo Reader app:
+
+<Steps>
+  <Step title="Open sync settings">
+    In Koodo Reader, go to **Settings** → **Backup and Sync** → **Docker**.
+  </Step>
+  <Step title="Enter your server details">
+    Set the server URL to `http://your-host:8080` (or your reverse proxy address if you have one configured).
+
+    Enter your `SERVER_USERNAME` and `SERVER_PASSWORD`.
+  </Step>
+  <Step title="Enable the HTTP server">
+    Make sure `ENABLE_HTTP_SERVER=true` is set in your container's environment. The sync server does not start unless this is explicitly enabled.
+  </Step>
+  <Step title="Test the connection">
+    Use the **Test connection** button in the app to verify that the app can reach your server and authenticate successfully.
+  </Step>
+</Steps>
+
+<Tip>
+  If your instance is behind a reverse proxy with HTTPS, use `https://your-domain:443` (or the appropriate port) as the server URL in the app. Make sure your proxy forwards requests to both port 80 (web UI) and port 8080 (sync server).
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Docker deployment" icon="docker" href="/self-hosting/docker">
+    Set up and run the Docker container.
+  </Card>
+  <Card title="Sync overview" icon="rotate" href="/sync/overview">
+    Learn how sync works across devices and backends.
+  </Card>
+</CardGroup>

@@ -1,0 +1,272 @@
+---
+title: "Reader settings"
+description: "Customize typography, layout, display, and behavior to suit your reading style."
+---
+
+Koodo Reader gives you fine-grained control over how books look and behave. Most settings apply immediately and are saved to your local configuration.
+
+<Tip>
+  Settings you change in the reader panel apply globally by default. If you open the same setting from within a specific book, that change is saved per-book and overrides the global value for that title only.
+</Tip>
+
+## Typography
+
+<AccordionGroup>
+  <Accordion title="Font family">
+    Choose a font for your book text. You can select from built-in system fonts or load a custom font file. The font setting applies to the book body text; headings and other styled elements follow the book's own stylesheet unless you enable **Overwrite the default text style in the book**.
+  </Accordion>
+
+  <Accordion title="Font size">
+    Adjust the base font size using the size slider in the reader panel. Larger sizes are easier to read on high-resolution displays; smaller sizes fit more content on screen.
+  </Accordion>
+
+  <Accordion title="Line spacing">
+    Controls the vertical space between lines of text. Increasing line spacing improves readability for dense paragraphs, especially in long-form non-fiction.
+  </Accordion>
+
+  <Accordion title="Paragraph spacing">
+    Sets the space between paragraphs. Use a higher value when reading books that rely on paragraph breaks rather than indentation to separate ideas.
+  </Accordion>
+
+  <Accordion title="Text color">
+    Pick a custom text color. This is independent of the background color so you can create combinations that work for your lighting conditions.
+  </Accordion>
+
+  <Accordion title="Text indentation">
+    Enable **Text indentation** (`isIndent`) to indent the first line of each paragraph, matching the typographic convention used in print books.
+  </Accordion>
+
+  <Accordion title="Bold, italic, underline, and shadow">
+    Apply global text decorations to the entire book body:
+
+    - **Bold** (`isBold`) — increases stroke weight
+    - **Italic** (`isItalic`) — slants the text
+    - **Underline** (`isUnderline`) — adds a line beneath each word
+    - **Shadow** (`isShadow`) — adds a subtle drop shadow, which can improve contrast on certain backgrounds
+
+    These toggles are additive; you can combine them freely.
+  </Accordion>
+
+  <Accordion title="Fast reading mode (Bionic Reading)">
+    Enable **Fast reading mode** (`isBionic`) to bold the first half of each word. This technique, sometimes called Bionic Reading, guides the eye through text faster by anchoring it to the bold leading characters.
+  </Accordion>
+</AccordionGroup>
+
+## Layout
+
+<AccordionGroup>
+  <Accordion title="Single column and two-column layout">
+    The reader defaults to single-column layout. On wide screens you can switch to a two-column layout that mimics a physical book spread.
+  </Accordion>
+
+  <Accordion title="Continuous scroll">
+    Switch from paginated mode to continuous scroll. Scroll mode is useful for non-fiction and reference material where you want to scan through content freely rather than flip pages.
+  </Accordion>
+
+  <Accordion title="Margins">
+    Adjust the left, right, top, and bottom margins of the reading area. Narrower margins give you more text per screen; wider margins make long reading sessions easier on the eyes.
+  </Accordion>
+
+  <Accordion title="Enable hyphenation">
+    Enable **Hyphenation** (`isHyphenation`) to break long words across line endings. This reduces ragged right edges in narrow columns and justified text.
+  </Accordion>
+
+  <Accordion title="Allow orphan and widow lines">
+    When enabled (`isOrphanWidow`), single lines at the top or bottom of a column (orphans and widows) are permitted. Disable this setting to force Koodo to reflow paragraphs and avoid isolated lines.
+  </Accordion>
+
+  <Accordion title="Sliding animation (PDF)">
+    Enable **Sliding animation** (`isSliding`) for PDF documents to get an animated page-turn transition when moving between pages.
+  </Accordion>
+
+  <Accordion title="Render PDF from even page">
+    Enable **Render PDF from even page** (`isStartFromEven`) to start the two-column PDF view on an even-numbered page, aligning the spread to match the original print layout.
+  </Accordion>
+</AccordionGroup>
+
+## Display
+
+<AccordionGroup>
+  <Accordion title="Background color">
+    Set the background color of the reading area. Koodo includes four preset backgrounds — white, dark, sepia, and green — and lets you pick a fully custom color. The background color is applied to the reader container and updates immediately.
+
+    The four presets are:
+
+    | Preset | Background | Text color |
+    |--------|-----------|------------|
+    | White  | `rgba(255,255,255,1)` | `rgba(0,0,0,1)` |
+    | Dark   | `rgba(44,47,49,1)` | `rgba(255,255,255,1)` |
+    | Sepia  | `rgba(233,216,188,1)` | `rgba(89,68,41,1)` |
+    | Green  | `rgba(197,231,207,1)` | `rgba(54,80,62,1)` |
+  </Accordion>
+
+  <Accordion title="Brightness">
+    The brightness slider applies a CSS `brightness()` filter to the reading area. Values below 1 dim the screen; values above 1 increase it. This lets you fine-tune contrast without changing your system display settings.
+  </Accordion>
+
+  <Accordion title="Invert color">
+    Enable **Invert color** (`isInvert`) to apply a CSS `invert(1)` filter to the reader area. Combined with the dark background preset this produces a true dark-mode reading experience, and combined with a white background it creates a high-contrast inverted view suitable for some visual impairments.
+  </Accordion>
+
+  <Accordion title="Allow Javascript in the books">
+    Enable **Allow Javascript in the books** (`isAllowScript`) to run JavaScript embedded in EPUB files. This is required for interactive ebooks and enhanced publications. Disable it for untrusted books to prevent unwanted script execution.
+  </Accordion>
+
+  <Accordion title="Show page border">
+    Enable **Show page border** (`isShowPageBorder`) to draw a visible border around the page area. Useful for orienting yourself in scroll mode or on large displays.
+  </Accordion>
+</AccordionGroup>
+
+## Reader UI
+
+<AccordionGroup>
+  <Accordion title="Hide header and footer">
+    Toggle **Hide header** (`isHideHeader`) and **Hide footer** (`isHideFooter`) to remove the chapter name and page number bars from the reading interface, giving you a distraction-free reading view.
+  </Accordion>
+
+  <Accordion title="Hide navigation button">
+    Enable **Hide navigation button** (`isHidePageButton`) to remove the previous/next chapter arrows from the edges of the reading area.
+  </Accordion>
+
+  <Accordion title="Hide menu button">
+    Enable **Hide menu button** (`isHideMenuButton`) to remove the top-right menu trigger from the reader view.
+  </Accordion>
+
+  <Accordion title="Hide audiobook button">
+    Enable **Hide audiobook button** (`isHideAudiobookButton`) to remove the TTS/audiobook button from the reader toolbar.
+  </Accordion>
+
+  <Accordion title="Hide AI button">
+    Enable **Hide AI button** (`isHideAIButton`) to remove the AI assistant shortcut from the reader toolbar.
+  </Accordion>
+
+  <Accordion title="Hide page scale button">
+    Enable **Hide page scale button** (`isHideScaleButton`) to remove the zoom/scale controls from the PDF reader toolbar.
+  </Accordion>
+
+  <Accordion title="Hide PDF-to-text button">
+    Enable **Hide pdf to text button** (`isHidePDFConvertButton`) to remove the PDF text extraction toggle from the toolbar.
+  </Accordion>
+
+  <Accordion title="Hide mimical background">
+    Enable **Hide mimical background** (`isHideBackground`) to remove the decorative page-shadow background effect in the reader.
+  </Accordion>
+</AccordionGroup>
+
+## General settings
+
+These settings are available under **Settings > General**.
+
+<AccordionGroup>
+  <Accordion title="Library and import">
+    | Setting | Description |
+    |---------|-------------|
+    | Import books as link *(desktop only)* | Imported books are not copied into the library folder — only a link to the original file path is stored. |
+    | Open book without adding it to library *(desktop only)* | Books opened from the file manager are not added to your library. |
+    | Auto precache books after import | After import, Koodo generates a pre-cached version of each book to speed up subsequent opens. |
+    | Export books with original name | Use the original file name when exporting a book instead of the book's metadata title. |
+    | Use file name as book title | Display the file name as the book title instead of the title embedded in the book's metadata. |
+    | Delete original file when permanently deleting books *(desktop only)* | When you permanently delete a book, the source file on disk is also deleted. |
+  </Accordion>
+
+  <Accordion title="Shelf and organization">
+    | Setting | Description |
+    |---------|-------------|
+    | Disable trash bin | Books are permanently deleted immediately instead of being sent to a trash bin. |
+    | Hide books already added to the shelf | Books that belong to a shelf are hidden from the home page library view. |
+    | Delete book from shelf also deleting book itself | Removing a book from a shelf also deletes the book from your library. |
+  </Accordion>
+
+  <Accordion title="Window and system (desktop only)">
+    | Setting | Description |
+    |---------|-------------|
+    | Disable screen blanking | Prevents your computer from entering sleep mode while Koodo is running. |
+    | Windows always on top | Keeps the Koodo window above all other windows. |
+    | Auto maximize main window | The main window is maximized when the app launches. |
+    | Automatically launch on system startup | Koodo starts automatically when you log in. |
+    | Minimize to tray on close | Closing the window minimizes to the system tray instead of quitting. |
+    | Open url with built-in browser | URLs in books open in Koodo's built-in browser instead of your default browser. |
+    | Disable update notification | Suppresses the notification shown when a new version is available. |
+  </Accordion>
+
+  <Accordion title="AI">
+    | Setting | Description |
+    |---------|-------------|
+    | Disable AI features | Completely disables the AI assistant and all AI-related UI elements. |
+  </Accordion>
+</AccordionGroup>
+
+## Appearance settings
+
+These settings are available under **Settings > Appearance**.
+
+<AccordionGroup>
+  <Accordion title="PDF cover and cropping">
+    | Setting | Description |
+    |---------|-------------|
+    | Don't use first page as PDF cover | Koodo will not extract the first page of a PDF as the cover image. |
+    | Don't crop book cover | Cover images are displayed without cropping or resizing. |
+  </Accordion>
+</AccordionGroup>
+
+## Sync settings
+
+These settings are available under **Settings > Sync**.
+
+<AccordionGroup>
+  <Accordion title="Sync behavior">
+    | Setting | Description |
+    |---------|-------------|
+    | Disable automatic sync | Koodo Reader will not sync automatically on launch or when exiting a book. You must trigger sync manually. |
+    | Auto download cloud books | By default, only book metadata is synced; files are downloaded on demand. Enable this to download all book files during sync for offline access. |
+    | Enable Koodo Sync | Stores reading progress, notes, highlights, and bookmarks via Koodo's cloud service for faster sync. Books and covers are still synced through your configured data source. Disabling this removes that data from Koodo's cloud. |
+    | Always keep local data when resolving sync conflicts | If a local change conflicts with a deletion in the cloud, Koodo keeps local data by default when this is enabled. Otherwise, cloud state takes precedence. |
+  </Accordion>
+</AccordionGroup>
+
+## Reading behavior settings
+
+These settings are available under **Settings > Reading**.
+
+<AccordionGroup>
+  <Accordion title="Touch screen and input">
+    | Setting | Description |
+    |---------|-------------|
+    | Turn on touch screen mode | Optimizes gestures and UI for touch-screen devices. |
+    | Prevent accidental trigger | The reader menu only opens on click, not on hover. |
+    | No popup when selecting texts | Disables the word-lookup and action popup when you select text. Useful when using a third-party translation tool alongside Koodo. |
+  </Accordion>
+
+  <Accordion title="Window behavior (desktop only)">
+    | Setting | Description |
+    |---------|-------------|
+    | Merge reader into Word | Hides the reader window frame and makes it blend into Word or any text editor. Set position, size, and style first. |
+    | Open books in the main window | Opens books in the main window instead of a separate reader window. |
+    | Auto open book in maximized screen | The reader window is maximized when you open a book. |
+    | Auto open book in full screen | The reader window enters full screen when you open a book. |
+  </Accordion>
+
+  <Accordion title="Navigation and scroll">
+    | Setting | Description |
+    |---------|-------------|
+    | Auto open last-read book | The book you last read is reopened automatically when Koodo launches. |
+    | Disable automatically scroll to next or previous chapter | Prevents automatic chapter advancement when you reach the end of a chapter. |
+    | Disable automatically scroll to the bottom of the AI chat | The AI chat panel does not auto-scroll to new messages. |
+  </Accordion>
+
+  <Accordion title="Style overrides">
+    | Setting | Description |
+    |---------|-------------|
+    | Overwrite the default link style in the book | Applies Koodo's link style over the book's own link styling. |
+    | Overwrite the default text style in the book | Applies your typography settings (font, size, color) over the book's own text styling. |
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="Themes" icon="palette" href="/customization/themes">
+    Apply color themes and night mode to your reading environment.
+  </Card>
+  <Card title="Plugins" icon="puzzle" href="/customization/plugins">
+    Extend Koodo with TTS and AI plugins.
+  </Card>
+</CardGroup>

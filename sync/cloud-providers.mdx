@@ -1,0 +1,242 @@
+---
+title: "Cloud providers"
+description: "Configuration reference for every cloud provider supported by Koodo Reader, including OAuth-based and credential-based setup."
+keywords: ["cloud sync", "WebDAV", "Google Drive", "OneDrive", "Dropbox", "S3", "MEGA", "FTP", "SFTP"]
+---
+
+Koodo Reader supports two categories of cloud providers: **OAuth-based** providers that authenticate through a browser login flow, and **credential-based** providers that require you to enter connection details manually.
+
+<Note>
+  All providers except WebDAV, FTP, and SFTP require a Koodo Pro subscription. Sign in at **Settings → Account** before configuring a Pro provider.
+</Note>
+
+To add a provider, go to **Settings → Data source → Add data source**, select your provider, and follow the steps below.
+
+## OAuth-based providers
+
+These providers authenticate through a browser-based OAuth login. Koodo Reader receives a token automatically after you authorize the connection — you do not need to copy or paste credentials.
+
+**Supported OAuth providers:**
+
+- OneDrive
+- OneDrive (full access)
+- Google Drive
+- Dropbox
+- iCloud
+- Box
+- Yandex Disk
+- Aliyun Drive
+- Dubox
+- 115 Yun
+- pCloud
+
+### Setup
+
+<Steps>
+  <Step title="Open data source settings">
+    Go to **Settings → Data source → Add data source**.
+  </Step>
+  <Step title="Select your provider">
+    Choose a provider from the list above.
+  </Step>
+  <Step title="Authorize access">
+    Click **Connect**. A browser window opens. Log in to your cloud account and grant Koodo Reader permission to access your files.
+  </Step>
+  <Step title="Confirm the connection">
+    After authorization, the provider appears in your data source list. Select it as your active sync provider.
+  </Step>
+</Steps>
+
+<Note>
+  **OneDrive vs. OneDrive (full access):** The standard OneDrive integration uses app-scoped access, which means Koodo Reader can only read and write files in its own application folder. OneDrive (full access) requests broader access and can read and write anywhere in your OneDrive, which is required if you want to place your backup in a custom folder.
+</Note>
+
+## Credential-based providers
+
+These providers require you to enter connection details manually. Use the configuration fields below when setting up each provider.
+
+<AccordionGroup>
+  <Accordion title="WebDAV">
+    WebDAV is the recommended self-hosted option. It works on desktop, browser, and mobile, and does not require a Pro subscription.
+
+    <ParamField path="url" type="string" required>
+      Full URL to your WebDAV server, including protocol and port if non-standard.
+
+      Example: `https://example.com/dav`
+    </ParamField>
+
+    <ParamField path="dir" type="string" required>
+      Folder path on the WebDAV server where Koodo Reader will store its data. Create this folder manually on your server before connecting.
+
+      Example: `KoodoReader`
+    </ParamField>
+
+    <ParamField path="username" type="string" required>
+      Your WebDAV username.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Your WebDAV password.
+    </ParamField>
+
+    <Tip>
+      See [Self-hosted sync](/sync/self-hosted) for instructions on setting up a WebDAV server with Nextcloud, nginx, or rclone.
+    </Tip>
+  </Accordion>
+
+  <Accordion title="FTP">
+    FTP is available on the desktop app only and does not require a Pro subscription.
+
+    <ParamField path="url" type="string" required>
+      IP address or hostname of your FTP server. Do not include the protocol prefix.
+
+      Example: `192.168.28.173`
+    </ParamField>
+
+    <ParamField path="port" type="string" required>
+      Port your FTP server listens on.
+
+      Default: `21`
+    </ParamField>
+
+    <ParamField path="dir" type="string">
+      Folder path on the FTP server where Koodo Reader will store its data. Leave blank to use the root directory.
+
+      Example: `KoodoReader`
+    </ParamField>
+
+    <ParamField path="username" type="string" required>
+      Your FTP username.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Your FTP password.
+    </ParamField>
+
+    <ParamField path="ssl" type="string" required>
+      Whether to use SSL/TLS (FTPS). Enter `1` to enable or `0` to disable.
+    </ParamField>
+  </Accordion>
+
+  <Accordion title="SFTP">
+    SFTP is available on the desktop app only and does not require a Pro subscription.
+
+    <ParamField path="url" type="string" required>
+      IP address or hostname of your SFTP server.
+
+      Example: `192.168.28.173`
+    </ParamField>
+
+    <ParamField path="port" type="string" required>
+      Port your SFTP server listens on.
+
+      Default: `22`
+    </ParamField>
+
+    <ParamField path="dir" type="string">
+      Folder path on the SFTP server where Koodo Reader will store its data. Leave blank to use the home directory.
+
+      Example: `KoodoReader`
+    </ParamField>
+
+    <ParamField path="username" type="string" required>
+      Your SFTP username.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Your SFTP password.
+    </ParamField>
+  </Accordion>
+
+  <Accordion title="S3 Compatible">
+    S3 Compatible works with any storage provider that implements the Amazon S3 API, including AWS S3, MinIO, Cloudflare R2, and Backblaze B2. Requires Pro.
+
+    <ParamField path="endpoint" type="string" required>
+      The endpoint URL for your S3-compatible storage. For AWS S3, this is region-specific. For self-hosted MinIO or Cloudflare R2, use your custom endpoint.
+
+      Example: `https://endpoint.example.com`
+    </ParamField>
+
+    <ParamField path="region" type="string" required>
+      The storage region. For providers that do not use regions, enter any non-empty string (e.g., `auto`).
+
+      Example: `ap-west-1`
+    </ParamField>
+
+    <ParamField path="bucketName" type="string" required>
+      The name of the bucket where Koodo Reader will store its data. The bucket must already exist.
+
+      Example: `koodo-reader-bucket`
+    </ParamField>
+
+    <ParamField path="dir" type="string">
+      An optional key prefix (folder path) inside the bucket.
+
+      Example: `KoodoReader`
+    </ParamField>
+
+    <ParamField path="accessKeyId" type="string" required>
+      Your S3 access key ID.
+    </ParamField>
+
+    <ParamField path="secretAccessKey" type="string" required>
+      Your S3 secret access key.
+    </ParamField>
+  </Accordion>
+
+  <Accordion title="MEGA">
+    MEGA requires credentials from your MEGA account. Requires Pro. Supported on desktop and browser only.
+
+    <ParamField path="email" type="string" required>
+      The email address associated with your MEGA account.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Your MEGA account password.
+    </ParamField>
+  </Accordion>
+
+  <Accordion title="Docker">
+    Docker connects to a self-hosted Koodo Reader sync server running in a Docker container. Requires Pro.
+
+    <ParamField path="url" type="string" required>
+      The address of your Docker sync server, including protocol and port.
+
+      Example: `http://192.168.28.14:8080`
+    </ParamField>
+
+    <ParamField path="username" type="string" required>
+      Username configured on your Docker sync server.
+    </ParamField>
+
+    <ParamField path="password" type="string" required>
+      Password configured on your Docker sync server.
+    </ParamField>
+
+    <Tip>
+      See [Self-hosted sync](/sync/self-hosted) for instructions on deploying the Koodo Reader sync server with Docker.
+    </Tip>
+  </Accordion>
+</AccordionGroup>
+
+## Platform support summary
+
+| Provider | Desktop | Browser | Mobile | Pro required |
+|---|---|---|---|---|
+| WebDAV | Yes | Yes | Yes | No |
+| FTP | Yes | No | No | No |
+| SFTP | Yes | No | No | No |
+| S3 Compatible | Yes | Yes | Yes | Yes |
+| Docker | Yes | Yes | Yes | Yes |
+| OneDrive | Yes | Yes | Yes | Yes |
+| OneDrive (full access) | Yes | Yes | Yes | Yes |
+| Google Drive | Yes | Yes | Yes | Yes |
+| Dropbox | Yes | Yes | Yes | Yes |
+| Box | Yes | Yes | Yes | Yes |
+| MEGA | Yes | Yes | No | Yes |
+| iCloud | Yes | No | Yes | Yes |
+| Dubox | Yes | No | Yes | Yes |
+| Aliyun Drive | Yes | No | Yes | Yes |
+| Yandex Disk | Yes | No | Yes | Yes |
+| 115 Yun | Yes | No | Yes | Yes |
+| pCloud | Yes | No | Yes | Yes |

@@ -1,0 +1,112 @@
+---
+title: "Plugins"
+description: "Extend Koodo Reader with text-to-speech, AI, and other capability plugins."
+---
+
+Koodo Reader's plugin system lets you add features that are not built into the core app. Plugins are self-contained scripts that integrate with the reader to provide text-to-speech (TTS) playback, AI-powered translation and summarization, dictionary lookup, and more.
+
+<Warning>
+  Only install plugins from sources you trust. Koodo verifies each plugin script against a SHA-256 hash (`scriptSHA256`) recorded in the plugin manifest. If the hash does not match, the plugin is rejected. Even so, you should only install plugins from the official marketplace or known, reputable authors.
+</Warning>
+
+## Plugin model
+
+Each plugin is described by the following fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `key` | `string` | Unique identifier for the plugin. Used internally to match voices and engines. |
+| `type` | `string` | Plugin category. Common values: `tts` (text-to-speech), `ai` (AI features such as translation and summarization). |
+| `displayName` | `string` | Human-readable name shown in the plugin list and UI. |
+| `icon` | `string` | URL or data URI for the plugin's icon. Displayed next to the plugin name. |
+| `version` | `string` | Semantic version string (e.g. `1.0.0`). |
+| `autoValue` | `string` | Default selection value applied when the plugin is first activated. |
+| `config` | `object` | Key-value configuration object for plugin-specific settings (e.g. API keys, endpoint URLs). |
+| `langList` | `array` | List of supported languages. Each entry includes a language code and display name. Used to populate the language selector for TTS plugins. |
+| `voiceList` | `array` | List of available voices. Each entry includes at minimum a `name` field used to identify the voice when generating audio. |
+| `scriptSHA256` | `string` | SHA-256 hash of the plugin script. Koodo checks this hash before executing the script. |
+| `script` | `string` | The plugin's JavaScript code, executed in a sandboxed context. |
+
+## Plugin types
+
+### TTS plugins
+
+TTS plugins add text-to-speech engines to the audiobook/read-aloud feature. When you play a book aloud, Koodo breaks the text into nodes and passes each node to the active TTS plugin along with the selected voice name and engine key.
+
+A TTS plugin exposes:
+
+- **`langList`** — the languages the engine supports, shown in the language dropdown when setting up narration.
+- **`voiceList`** — the voices available for the selected language. Each voice has a `name` used to request audio and a `displayName` shown in the UI. Voices may also include `gender` and `locale` metadata.
+- **`config`** — plugin-specific settings such as an API key or a self-hosted endpoint URL.
+
+Koodo's built-in AI voice engine provides a set of pre-configured voices (including Alloy, Aoede, Bella, Nova, Sarah, and others) without requiring a plugin. Third-party TTS plugins extend this with additional engines such as Azure Cognitive Services, ElevenLabs, or a locally hosted model.
+
+### AI plugins
+
+AI plugins add capabilities to the AI assistant panel: translation, dictionary lookup, book summarization, and chat. An AI plugin receives selected text or chapter content and returns a result that is displayed in the assistant sidebar.
+
+AI features can be disabled globally via **Settings > General > Disable AI features** (`isDisableAI`) if you do not want to use them.
+
+## Installing a plugin
+
+<Steps>
+  <Step title="Open Settings">
+    Click the **Settings** icon in the Koodo sidebar.
+  </Step>
+  <Step title="Go to the Plugins tab">
+    Select the **Plugins** tab in the settings panel.
+  </Step>
+  <Step title="Browse or enter a plugin URL">
+    You have two options:
+
+    - **Browse the marketplace** — click **Plugin marketplace** to open the official plugin directory at [koodoreader.com/en/plugin](https://koodoreader.com/en/plugin). Find a plugin and copy its manifest URL.
+    - **Enter a URL directly** — paste the plugin manifest URL into the input field if you have a direct link.
+  </Step>
+  <Step title="Add the plugin">
+    Click **Add** or **Install**. Koodo fetches the plugin manifest, verifies the `scriptSHA256` hash against the downloaded script, and registers the plugin if verification succeeds.
+  </Step>
+  <Step title="Configure the plugin">
+    After installation, the plugin appears in your plugin list. Click the plugin entry to expand its configuration. Fill in any required fields in the `config` object — typically an API key or endpoint URL — then save.
+  </Step>
+  <Step title="Select the plugin in the reader">
+    Open a book and go to the audiobook or AI panel. Your newly installed plugin will appear in the engine or provider dropdown. Select it to make it active.
+  </Step>
+</Steps>
+
+## Configuring a plugin
+
+Each plugin has its own `config` object with fields defined by the plugin author. Common configuration fields include:
+
+- **API key** — required for cloud-based TTS or AI services (e.g. an OpenAI API key for a GPT-based plugin).
+- **Endpoint URL** — for self-hosted engines, the base URL of your service.
+- **Model name** — for AI plugins that support multiple models.
+
+After saving the configuration, the plugin uses those values for all subsequent requests.
+
+## Selecting a language and voice (TTS plugins)
+
+When using a TTS plugin for read-aloud:
+
+1. Open the audiobook/narration panel in the reader.
+2. Select your installed TTS plugin from the **Engine** dropdown.
+3. Choose a **Language** from the `langList` provided by the plugin.
+4. Choose a **Voice** from the `voiceList` entries for that language.
+5. Adjust playback **Speed** as needed.
+6. Press **Play** to start narration.
+
+Koodo caches audio segments as they are generated to enable smooth playback without gaps between sentences.
+
+## Managing plugins
+
+To remove a plugin, go to **Settings > Plugins**, find the plugin in your list, and click **Delete** or the remove icon. Removing a plugin does not affect books you have already read or annotations you have made.
+
+To update a plugin, remove it and re-add it using the same manifest URL. Koodo will fetch the latest version and re-verify the hash.
+
+<CardGroup cols={2}>
+  <Card title="AI tools" icon="sparkles" href="/features/ai-tools">
+    Learn how to use the AI assistant for translation and summarization.
+  </Card>
+  <Card title="Reader settings" icon="sliders" href="/customization/reader-settings">
+    Configure typography, layout, and display options.
+  </Card>
+</CardGroup>

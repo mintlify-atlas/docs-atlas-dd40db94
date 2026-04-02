@@ -1,0 +1,127 @@
+---
+title: "Translations"
+description: "Help translate Koodo Reader into your language by editing existing translations or adding a new one."
+keywords: ["translation", "i18n", "localization", "contributing", "language"]
+---
+
+Koodo Reader is available in over 40 languages, all maintained by community contributors. Translation files are plain JSON, so no coding experience is required.
+
+## Translation file format
+
+Each language has a single file at:
+
+```
+src/assets/locales/{lang}/translation.json
+```
+
+The file contains key-value pairs where the key is the English term used in code and the value is the translated string.
+
+```json
+{
+  "Books": "Books",
+  "Recent": "Recents",
+  "Bookmarks": "Bookmarks",
+  "Notes": "Notes",
+  "Highlights": "Highlights",
+  "Shelf": "Shelf",
+  "Dictionary": "Dictionary",
+  "New version available": "New version available"
+}
+```
+
+Untranslated terms appear at the bottom of each file with the English value still in place — those are the ones that need your attention.
+
+## Edit an existing translation
+
+<Steps>
+  <Step title="Find your language">
+    Locate your language in the supported languages table below and note its language code.
+  </Step>
+  <Step title="Open the source file">
+    Navigate to `src/assets/locales/{lang}/translation.json` in the repository. You can view it directly on GitHub using the links in the table below.
+  </Step>
+  <Step title="Identify untranslated terms">
+    Untranslated strings are listed at the bottom of the file. They still contain the English value as a placeholder.
+  </Step>
+  <Step title="Translate the terms">
+    Replace each English placeholder value with the correct translation in your language.
+  </Step>
+  <Step title="Submit your changes">
+    Submit your updated file via a [GitHub issue](https://github.com/koodo-reader/koodo-reader/issues/new?assignees=&labels=submit+translation&projects=&template=submit_translation.yml) or open a pull request. Both are welcome.
+  </Step>
+</Steps>
+
+## Add a new language
+
+<Steps>
+  <Step title="Download the English source file">
+    Download [`src/assets/locales/en/translation.json`](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/en/translation.json) from the repository. This is the authoritative source for all translatable strings.
+  </Step>
+  <Step title="Translate all strings">
+    Replace every English value with the translation in your target language. Keep all keys unchanged.
+  </Step>
+  <Step title="Submit your translation">
+    Submit the completed file via a [GitHub issue](https://github.com/koodo-reader/koodo-reader/issues/new?assignees=&labels=submit+translation&projects=&template=submit_translation.yml) or open a pull request. Include the language name and its BCP 47 code in your submission.
+  </Step>
+</Steps>
+
+<Tip>
+  You don't have to translate every string at once. Submitting partial translations via a GitHub issue is perfectly fine — other contributors can build on your work.
+</Tip>
+
+## Supported languages
+
+| Language | Code | Source file |
+|---|---|---|
+| Amharic | `am` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/am/translation.json) |
+| Arabic | `ar` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ar/translation.json) |
+| Armenian | `hy` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/hy/translation.json) |
+| Bengali | `bn` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/bn/translation.json) |
+| Bulgarian | `bg` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/bg/translation.json) |
+| Chinese (Simplified) | `zh-CN` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/zh-CN/translation.json) |
+| Chinese (Macau) | `zh-MO` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/zh-MO/translation.json) |
+| Chinese (Traditional) | `zh-TW` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/zh-TW/translation.json) |
+| Czech | `cs` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/cs/translation.json) |
+| Danish | `da` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/da/translation.json) |
+| Dutch | `nl` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/nl/translation.json) |
+| English | `en` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/en/translation.json) |
+| Finnish | `fi` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/fi/translation.json) |
+| French | `fr` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/fr/translation.json) |
+| German | `de` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/de/translation.json) |
+| Greek | `el` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/el/translation.json) |
+| Hindi | `hi` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/hi/translation.json) |
+| Hungarian | `hu` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/hu/translation.json) |
+| Indonesian | `id` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/id/translation.json) |
+| Interlingue | `ie` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ie/translation.json) |
+| Irish | `ga` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ga/translation.json) |
+| Italian | `it` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/it/translation.json) |
+| Japanese | `ja` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ja/translation.json) |
+| Korean | `ko` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ko/translation.json) |
+| Persian | `fa` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/fa/translation.json) |
+| Polish | `pl` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/pl/translation.json) |
+| Portuguese | `pt` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/pt/translation.json) |
+| Portuguese (Brazil) | `pt-BR` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/pt-BR/translation.json) |
+| Romanian | `ro` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ro/translation.json) |
+| Russian | `ru` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ru/translation.json) |
+| Serbian | `sr` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/sr/translation.json) |
+| Slovenian | `sl` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/sl/translation.json) |
+| Spanish | `es` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/es/translation.json) |
+| Swedish | `sv` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/sv/translation.json) |
+| Tagalog | `tl` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/tl/translation.json) |
+| Tamil | `ta` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/ta/translation.json) |
+| Thai | `th` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/th/translation.json) |
+| Tibetan | `bo` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/bo/translation.json) |
+| Turkish | `tr` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/tr/translation.json) |
+| Ukrainian | `uk` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/uk/translation.json) |
+| Vietnamese | `vi` | [View](https://github.com/koodo-reader/koodo-reader/blob/master/src/assets/locales/vi/translation.json) |
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Development setup" icon="code" href="/contributing/development">
+    Set up a local environment to test your translation changes.
+  </Card>
+  <Card title="Submit a translation" icon="arrow-up-right" href="https://github.com/koodo-reader/koodo-reader/issues/new?assignees=&labels=submit+translation&projects=&template=submit_translation.yml">
+    Open a GitHub issue to submit your work.
+  </Card>
+</CardGroup>

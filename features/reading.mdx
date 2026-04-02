@@ -1,0 +1,140 @@
+---
+title: "Reading"
+description: "Open books, navigate content, and customize the reading experience in Koodo Reader."
+keywords: ["reading", "layouts", "navigation", "table of contents", "text-to-speech", "touch screen"]
+---
+
+Koodo Reader provides a full-featured reading view with multiple layout options, precise navigation, and a clean reader menu that keeps controls out of the way until you need them.
+
+## Opening a book
+
+Click or tap any book in the library to open it. By default, the reader opens in a separate window on desktop. To open books in the main window instead, enable **Open books in the main window** in Settings → Reading.
+
+<Tip>
+Enable **Auto open last-read book** in Settings → Reading to automatically resume where you left off each time Koodo Reader launches.
+</Tip>
+
+On the desktop app, you can also configure books to open maximized or in full screen automatically via **Auto open book in maximized screen** and **Auto open book in full screen** in Settings → Reading.
+
+## Reading layouts
+
+Koodo Reader supports three layout modes for reflowable formats (EPUB, TXT, FB2, DOCX, etc.):
+
+<CardGroup cols={2}>
+  <Card title="Single-column" icon="rectangle-vertical">
+    One column of text fills the reading area. The most common layout, suited to most screen sizes.
+  </Card>
+  <Card title="Two-column" icon="columns-2">
+    Content is split into two side-by-side columns, resembling a physical book spread. Well-suited to large displays in landscape orientation.
+  </Card>
+  <Card title="Continuous scroll" icon="arrow-down">
+    Text flows vertically without page breaks. Scroll through the entire book like a web page.
+  </Card>
+</CardGroup>
+
+<Note>
+PDF files use a fixed-page layout and do not support reflowable column modes. PDF-specific options include rendering from an even page, page scaling, and color inversion.
+</Note>
+
+### Additional layout options
+
+The following toggles are available in the reader settings panel:
+
+| Option | Description |
+|---|---|
+| Sliding animation | Animated page transitions |
+| Fast reading mode (Bionic) | Makes the first half of each word bold to guide the eye |
+| Text indentation | Adds paragraph indentation |
+| Enable hyphenation | Hyphenates long words at line breaks |
+| Bold / Italic / Underline / Shadow | Text style overrides |
+| Invert color | Inverts the rendering for dark-background reading |
+| Show page border | Displays a visible border around the page |
+
+## Navigation
+
+### Page turning
+
+- **Click** the left or right edge of the reading area to turn pages.
+- **Arrow keys** (`←` / `→`) move backward and forward one page.
+- **Space** or **Page Down** advances one page; **Shift+Space** or **Page Up** goes back.
+
+<Tip>
+In continuous scroll mode, use the scroll wheel or trackpad to move through the text instead of clicking page zones.
+</Tip>
+
+### Table of contents
+
+Open the reader menu (hover or click the top area of the reader) and select the **Contents** panel to see the full table of contents. Click any chapter title to jump directly to it.
+
+### Progress tracking
+
+The footer bar displays your current reading progress as a percentage, derived from the CFI (Canonical Fragment Identifier) position within the book. You can also drag the progress slider in the footer to jump to any point in the book.
+
+The header shows the current chapter title as you read.
+
+<Note>
+Header and footer display can be hidden individually via **Hide header** and **Hide footer** in the reader settings panel.
+</Note>
+
+### Auto-scroll between chapters
+
+When you reach the last page of a chapter in paginated mode, Koodo Reader automatically advances to the next chapter. To disable this behavior, enable **Disable auto scroll to next or previous chapter** in Settings → Reading.
+
+## Text selection
+
+Selecting text in the reader opens a popup toolbar with quick actions: highlight, add a note, translate, look up in dictionary, copy, and search.
+
+<Note>
+If you are using a third-party translation service that needs access to selected text, enable **No popup when selecting texts** in Settings → Reading. With this setting on, Koodo's popup will not appear on selection; right-clicking the selection will restore it.
+</Note>
+
+The popup can also be suppressed by enabling **Prevent accidental trigger**, which requires a click on the reader menu area rather than a hover to reveal controls.
+
+## Touch screen support
+
+Enable **Touch screen mode** in Settings → Reading to activate gesture and UI optimizations for touch devices:
+
+- Swipe left/right to turn pages.
+- Tap the center of the screen to show or hide the reader menu.
+- Pinch to zoom on PDF pages.
+
+This mode is automatically recommended on Android and iOS, but can also be enabled on desktop touch displays.
+
+## Text-to-speech
+
+Koodo Reader includes a text-to-speech (TTS) feature accessible from the reader menu via the audiobook button. TTS reads the current book aloud, advancing through chapters automatically.
+
+TTS voices include device voices (available offline) and AI-powered voices via the Koodo cloud service. AI voices require a Koodo account and are subject to a daily character quota.
+
+For configuration details — including voice selection, speed, and pitch — see [Plugins](/customization/plugins).
+
+<Note>
+The audiobook/TTS button can be hidden using **Hide audiobook button** in the reader settings panel if you do not use this feature.
+</Note>
+
+## Reader menu
+
+Hover over (or click, in prevent-trigger mode) the top edge of the reader to reveal the menu bar. It provides access to:
+
+- Table of contents
+- Bookmarks list
+- Annotations list
+- Reading settings (font, layout, background, margins)
+- AI tools panel
+- Progress slider
+- Page scale controls (PDF)
+
+<Tip>
+On the desktop app, enable **Merge reader into Word** in Settings → Reading to hide the reader window frame and blend it into a text editor, useful for discreet reading alongside work.
+</Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Annotations" href="/features/annotations" icon="pencil">
+    Add bookmarks, highlights, and notes to your books.
+  </Card>
+  <Card title="AI Tools" href="/features/ai-tools" icon="sparkles">
+    Look up words, translate passages, and summarize chapters.
+  </Card>
+</CardGroup>

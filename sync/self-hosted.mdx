@@ -1,0 +1,156 @@
+---
+title: "Self-hosted sync"
+description: "Use your own WebDAV server, SFTP/FTP server, or S3-compatible storage as a sync backend for Koodo Reader."
+keywords: ["self-hosted", "WebDAV", "Nextcloud", "MinIO", "S3", "SFTP", "FTP", "Docker", "rclone"]
+---
+
+Koodo Reader supports several open-protocol sync backends that you can run on your own infrastructure. This gives you full control over where your data is stored without relying on any third-party cloud service.
+
+The free-tier self-hosted options are:
+
+- **WebDAV** — works on desktop, browser, and mobile. The most flexible option.
+- **SFTP** — works on desktop only. Uses standard SSH file transfer.
+- **FTP** — works on desktop only. Suitable for simple local network servers.
+
+The Pro-tier self-hosted option is:
+
+- **S3 Compatible** — works with MinIO, Cloudflare R2, Backblaze B2, or any S3-compatible object store. Requires a Koodo Pro subscription.
+
+## Setting up WebDAV sync
+
+WebDAV is the recommended self-hosted backend. Any WebDAV-capable server works, including Nextcloud, ownCloud, nginx with the `dav` module, or `rclone serve webdav`.
+
+<Steps>
+  <Step title="Set up a WebDAV server">
+    Choose and install a WebDAV server. Common options:
+
+    - **Nextcloud** — full-featured, open-source cloud with WebDAV built in. See the [Nextcloud documentation](https://nextcloud.com) for installation instructions.
+    - **nginx with dav module** — lightweight option for serving a local directory over WebDAV.
+    - **rclone serve webdav** — wraps any `rclone`-supported remote (including local disk) as a WebDAV endpoint. Useful for testing.
+
+    Once the server is running, note its URL (e.g., `https://cloud.example.com/dav` or `http://192.168.1.10:8080`).
+  </Step>
+  <Step title="Create the sync folder">
+    On your WebDAV server, create a dedicated folder for Koodo Reader's data. For example, create a folder named `KoodoReader` at the root of your WebDAV share.
+
+    <Warning>
+      Koodo Reader does not create the server-side folder automatically. You must create it manually before connecting, otherwise the connection will fail.
+    </Warning>
+  </Step>
+  <Step title="Open sync settings in Koodo Reader">
+    In Koodo Reader, go to **Settings → Data source → Add data source** and select **WebDAV**.
+  </Step>
+  <Step title="Enter your connection details">
+    Fill in the four required fields:
+
+    | Field | Example |
+    |---|---|
+    | Server address | `https://cloud.example.com/dav` |
+    | Server path | `KoodoReader` |
+    | Username | `youruser` |
+    | Password | `yourpassword` |
+  </Step>
+  <Step title="Connect and verify">
+    Click **Connect**. Koodo Reader tests the connection and saves the configuration. If the connection succeeds, WebDAV appears in your data source list and you can select it as the active sync provider.
+  </Step>
+</Steps>
+
+## Setting up SFTP sync
+
+SFTP uses your existing SSH server — no additional software is required if the target machine already runs `sshd`.
+
+<Steps>
+  <Step title="Confirm SSH access">
+    Verify that you can reach the server via SSH and that password-based authentication is enabled (Koodo Reader does not currently support key-based auth for SFTP sync).
+  </Step>
+  <Step title="Open sync settings">
+    Go to **Settings → Data source → Add data source** and select **SFTP**.
+  </Step>
+  <Step title="Enter connection details">
+    | Field | Value |
+    |---|---|
+    | Server address | IP or hostname of your SSH server |
+    | Port | `22` (default) |
+    | Server path | Folder to use for sync data (e.g., `KoodoReader`) |
+    | Username | Your SSH username |
+    | Password | Your SSH password |
+  </Step>
+  <Step title="Connect">
+    Click **Connect** to save and test the connection.
+  </Step>
+</Steps>
+
+<Note>
+  SFTP sync is only available in the Koodo Reader desktop app. It is not available in the browser or mobile versions.
+</Note>
+
+## Setting up FTP sync
+
+FTP configuration is identical to SFTP except for the default port and the additional SSL option.
+
+<Steps>
+  <Step title="Confirm FTP access">
+    Verify that your FTP server is reachable and that you have valid credentials. Common FTP servers include `vsftpd`, `ProFTPD`, and FileZilla Server.
+  </Step>
+  <Step title="Open sync settings">
+    Go to **Settings → Data source → Add data source** and select **FTP**.
+  </Step>
+  <Step title="Enter connection details">
+    | Field | Value |
+    |---|---|
+    | Server address | IP or hostname of your FTP server |
+    | Port | `21` (default) |
+    | Server path | Folder to use for sync data (optional) |
+    | Username | Your FTP username |
+    | Password | Your FTP password |
+    | Use SSL | `1` to enable FTPS, `0` to disable |
+  </Step>
+  <Step title="Connect">
+    Click **Connect** to save and test the configuration.
+  </Step>
+</Steps>
+
+<Note>
+  FTP sync is only available in the Koodo Reader desktop app.
+</Note>
+
+## Setting up S3-compatible storage
+
+S3-compatible object storage (MinIO, Cloudflare R2, Backblaze B2, AWS S3, etc.) is available as a Pro feature and works across desktop, browser, and mobile.
+
+<Steps>
+  <Step title="Create a bucket">
+    In your S3-compatible storage console, create a bucket to hold Koodo Reader's data. Note the bucket name, region (or equivalent), and endpoint URL.
+  </Step>
+  <Step title="Create access credentials">
+    Generate an access key ID and secret access key with read/write permissions on the bucket.
+  </Step>
+  <Step title="Open sync settings">
+    Go to **Settings → Data source → Add data source** and select **S3 Compatible**.
+  </Step>
+  <Step title="Enter connection details">
+    | Field | Example |
+    |---|---|
+    | Endpoint | `https://s3.us-east-1.amazonaws.com` |
+    | Region | `us-east-1` |
+    | BucketName | `koodo-reader-bucket` |
+    | Path | `KoodoReader` (optional) |
+    | AccessKeyId | Your access key ID |
+    | SecretAccessKey | Your secret access key |
+  </Step>
+  <Step title="Connect">
+    Click **Connect**. Koodo Reader validates the credentials and saves the configuration.
+  </Step>
+</Steps>
+
+<Tip>
+  **Cloudflare R2** does not use geographic regions. Enter `auto` in the Region field when connecting to an R2 bucket.
+</Tip>
+
+## Using Docker as a complete self-hosted solution
+
+If you want a fully integrated self-hosted setup — sync server, user management, and web reader all in one — deploy the official Koodo Reader Docker image. The Docker provider connects Koodo Reader directly to this server and does not require a separate WebDAV or S3 backend.
+
+<Tip>
+  See [Docker deployment](/self-hosting/docker) for step-by-step instructions on running the Koodo Reader sync server with Docker Compose.
+</Tip>

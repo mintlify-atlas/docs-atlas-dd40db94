@@ -1,0 +1,208 @@
+---
+title: "Docker deployment"
+description: "Self-host Koodo Reader using Docker and Docker Compose."
+keywords: ["docker", "self-hosted", "deployment", "docker-compose"]
+---
+
+Koodo Reader can be self-hosted using Docker. The official image runs two services in a single container:
+
+- **Port 80** — the Koodo Reader web UI, served by Caddy
+- **Port 8080** — the HTTP file sync server, used by the Koodo Reader app to sync books and reading data
+
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) 20.10 or later
+- [Docker Compose](https://docs.docker.com/compose/install/) v2 or later
+
+## Quick start
+
+<Steps>
+  <Step title="Create a docker-compose.yml">
+    Create a `docker-compose.yml` file in your preferred directory:
+
+    <CodeGroup>
+
+    ```yaml docker-compose.yml (host directory volume)
+    version: "3.8"
+
+    services:
+      koodo-reader:
+        image: ghcr.io/koodo-reader/koodo-reader:master
+        container_name: koodo-reader
+        restart: unless-stopped
+        ports:
+          - "80:80"
+          - "8080:8080"
+        environment:
+          - SERVER_USERNAME=${SERVER_USERNAME:-admin}
+          - SERVER_PASSWORD=${SERVER_PASSWORD:-securePass123}
+          - ENABLE_HTTP_SERVER=false
+        volumes:
+          - /opt/uploads:/app/uploads
+    ```
+
+    ```yaml docker-compose.yml (named volume)
+    version: "3.8"
+
+    services:
+      koodo-reader:
+        image: ghcr.io/koodo-reader/koodo-reader:master
+        container_name: koodo-reader
+        restart: unless-stopped
+        ports:
+          - "80:80"
+          - "8080:8080"
+        environment:
+          - SERVER_USERNAME=${SERVER_USERNAME:-admin}
+          - SERVER_PASSWORD=${SERVER_PASSWORD:-securePass123}
+          - ENABLE_HTTP_SERVER=false
+        volumes:
+          - uploads_data:/app/uploads
+
+    volumes:
+      uploads_data:
+        driver: local
+    ```
+
+    </CodeGroup>
+
+    <Warning>
+      The default credentials (`admin` / `securePass123`) are used if you do not set `SERVER_USERNAME` and `SERVER_PASSWORD`. Change them before exposing your instance to the internet.
+    </Warning>
+  </Step>
+
+  <Step title="Set environment variables">
+    Set your credentials before starting the container. You can export them in your shell or use a `.env` file in the same directory as your `docker-compose.yml`:
+
+    ```bash .env
+    SERVER_USERNAME=your_username
+    SERVER_PASSWORD=your_secure_password
+    ```
+
+    <Note>
+      Docker Compose automatically loads a `.env` file from the same directory. Do not commit this file to version control.
+    </Note>
+  </Step>
+
+  <Step title="Start the container">
+    ```bash
+    docker compose up -d
+    ```
+
+    The container starts in detached mode. To follow the logs:
+
+    ```bash
+    docker compose logs -f
+    ```
+  </Step>
+
+  <Step title="Open the web UI">
+    Navigate to [http://localhost](http://localhost) in your browser. Koodo Reader loads from the Caddy web server on port 80.
+
+    To use the HTTP sync server, configure it in the Koodo Reader app's sync settings and point it to `http://your-host:8080`. See [Configuration](/self-hosting/configuration) for details.
+  </Step>
+</Steps>
+
+## Alternative: docker run
+
+If you prefer not to use Docker Compose, you can start the container directly:
+
+<CodeGroup>
+
+```bash With host directory
+docker run -d \
+  --name koodo-reader \
+  --restart unless-stopped \
+  -p 80:80 \
+  -p 8080:8080 \
+  -e SERVER_USERNAME=admin \
+  -e SERVER_PASSWORD=securePass123 \
+  -e ENABLE_HTTP_SERVER=false \
+  -v /opt/uploads:/app/uploads \
+  ghcr.io/koodo-reader/koodo-reader:master
+```
+
+```bash With named volume
+docker run -d \
+  --name koodo-reader \
+  --restart unless-stopped \
+  -p 80:80 \
+  -p 8080:8080 \
+  -e SERVER_USERNAME=admin \
+  -e SERVER_PASSWORD=securePass123 \
+  -e ENABLE_HTTP_SERVER=false \
+  -v koodo_uploads:/app/uploads \
+  ghcr.io/koodo-reader/koodo-reader:master
+```
+
+</CodeGroup>
+
+## Ports
+
+| Port | Service | Description |
+| ---- | ------- | ----------- |
+| `80` | Caddy (web UI) | Serves the Koodo Reader single-page application |
+| `8080` | HTTP file server | Handles book uploads, downloads, and sync operations |
+
+## Data persistence
+
+Uploaded books and sync data are stored in `/app/uploads` inside the container. Mount this path to a host directory or named volume to persist data across container restarts and upgrades.
+
+<Note>
+  If you remove the container without a volume mount, all uploaded books and sync data will be lost. Always configure a volume before adding books.
+</Note>
+
+## Using a reverse proxy
+
+For HTTPS support, place a reverse proxy in front of the container.
+
+<Tip>
+  Caddy itself supports automatic HTTPS if you expose port 443 and configure a domain name. Alternatively, use nginx or another reverse proxy to terminate TLS and forward traffic to port 80 (web UI) and port 8080 (sync server). Make sure both ports are proxied if you use the sync feature.
+</Tip>
+
+## Using Docker secrets
+
+For production deployments, use Docker secrets instead of plain-text environment variables to manage the server password:
+
+```yaml docker-compose-secret.yml
+services:
+  koodo-reader:
+    image: ghcr.io/koodo-reader/koodo-reader:master
+    container_name: koodo-reader
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "8080:8080"
+    environment:
+      - SERVER_USERNAME=${SERVER_USERNAME:-admin}
+      - SERVER_PASSWORD_FILE=${SERVER_PASSWORD_FILE:-my_secret}
+      - ENABLE_HTTP_SERVER=false
+    volumes:
+      - /opt/uploads:/app/uploads
+    secrets:
+      - my_secret
+
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+```
+
+Create `my_secret.txt` containing only the password, then start the stack:
+
+```bash
+echo -n "your_secure_password" > my_secret.txt
+docker compose -f docker-compose-secret.yml up -d
+```
+
+The server reads the password from `/run/secrets/my_secret` at startup and falls back to the `SERVER_PASSWORD` environment variable if no secret file is found.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Configuration" icon="sliders" href="/self-hosting/configuration">
+    Learn all available environment variables and sync settings.
+  </Card>
+  <Card title="Sync overview" icon="rotate" href="/sync/overview">
+    Understand how Koodo Reader sync works across devices.
+  </Card>
+</CardGroup>
